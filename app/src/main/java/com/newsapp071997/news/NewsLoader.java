@@ -1,0 +1,27 @@
+package com.newsapp071997.news;
+
+import android.content.AsyncTaskLoader;
+import android.content.Context;
+
+import java.util.List;
+
+public class NewsLoader extends AsyncTaskLoader<List<NewsDesc>> {
+    private String mUrl;
+    public NewsLoader(Context context,String url){
+        super(context);
+        mUrl = url;
+    }
+
+    @Override
+    public List<NewsDesc> loadInBackground() {
+        if(mUrl == null)
+            return null;
+        List<NewsDesc> newsList = NewsJson.fetchNewsData(mUrl);
+return  newsList;
+    }
+
+    @Override
+    protected void onStartLoading() {
+        forceLoad();
+    }
+}
